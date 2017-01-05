@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<data>
+
+</data>
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.saka.myapplication.CustomView.TopBar
+            android:id="@+id/topbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorAccent"
+            app:leftText="更多"
+            app:leftTextColor="@color/textBlack"
+            app:leftTextSize="5sp"
+            app:rightText="取消"
+            app:rightTextColor="@color/textBlack"
+            app:rightTextSize="5sp"
+            app:title="我的应用"
+            app:titleSize="5sp"
+            app:titleTextColor="@color/textBlack" />
+        <com.saka.myapplication.CustomView.TabBar
+            android:id="@+id/tab_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/topbar"
+            android:layout_above="@id/tab_bar"/>
+    </RelativeLayout>
+</layout>

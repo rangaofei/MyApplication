@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+    <string name="tabbar_serch">查询</string>
+    <string name="tabbar_joke">笑话</string>
+    <string name="tabbar_news">新闻</string>
+    <string name="tabbar_setting">设置</string>
+
+    <string name="idcard">身份证号码查询</string>
+    <string name="phonenum">电话号码查询</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

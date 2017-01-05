@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="menu"
+            type="com.saka.myapplication.Models.TabbarMenu" />
+
+        <variable
+            name="clicklistener"
+            type="com.saka.myapplication.Models.ClickListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorAccent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tabbar_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="@{()->clicklistener.OnClickTab(menu.first)}"
+            android:text="@{menu.first}" />
+
+        <TextView
+            android:id="@+id/tabbar_joke"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="@{()->clicklistener.OnClickTab(menu.second)}"
+            android:text="@{menu.second}" />
+
+        <TextView
+            android:id="@+id/tabbar_news"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="@{()->clicklistener.OnClickTab(menu.third)}"
+            android:text="@{menu.third}" />
+        <TextView
+            android:id="@+id/tabbar_setting"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="@{()->clicklistener.OnClickTab(menu.fourth)}"
+            android:text="@{menu.fourth}"/>
+    </LinearLayout>
+
+</layout>

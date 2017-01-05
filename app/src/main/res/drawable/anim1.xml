@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:drawable="@drawable/edit_login"
+    tools:targetApi="lollipop">
+    <target
+        android:animation="@animator/anim_bar_fill"
+        android:name="bar"/>
+    <target
+        android:animation="@animator/anim_default_gone"
+        android:name="round"/>
+    <target
+        android:animation="@animator/anim_default_gone"
+        android:name="right"/>
+    <target
+        android:animation="@animator/anim_default_gone"
+        android:name="round2"/>
+    <target
+        android:animation="@animator/anim_default_gone"
+        android:name="bar2"/>
+</animated-vector>
