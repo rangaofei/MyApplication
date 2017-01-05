@@ -1,5 +1,7 @@
 package com.saka.myapplication.Models;
 
+import android.view.View;
+
 import java.util.Arrays;
 
 /**
@@ -53,11 +55,27 @@ public class HistoryModle {
         private String pic;
         private String title;
         private int year;
-
         private String Date;
+        private int showDetails= View.GONE;
+
+        public String getLunar() {
+            return lunar;
+        }
+
+        public void setLunar(String lunar) {
+            this.lunar = lunar;
+        }
+
+        public int getShowDetails() {
+            return showDetails;
+        }
+
+        public void setShowDetails(int showDetails) {
+            this.showDetails = showDetails;
+        }
 
         public String getDate() {
-            return year+"年"+month+"月"+day+"日";
+            return year + "年" + month + "月" + day + "日";
         }
 
         public void setDate(String date) {

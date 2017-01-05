@@ -41,7 +41,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
     @Override
     public void onBindViewHolder(HistoryHolder holder, int position) {
         holder.binding.setVariable(BR.historymodel, historyResults[position]);
+        searchItemClick=new SearchItemClick(position);
+        searchItemClick.setListener(listener);
+        holder.binding.setVariable(BR.historyclickevent,searchItemClick);
         holder.binding.executePendingBindings();
+
     }
 
 
@@ -62,7 +66,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
 
     static class HistoryHolder extends RecyclerView.ViewHolder {
         ViewDataBinding binding;
-
         public HistoryHolder(ViewDataBinding binding) {
             super(binding.getRoot());
             this.binding = binding;

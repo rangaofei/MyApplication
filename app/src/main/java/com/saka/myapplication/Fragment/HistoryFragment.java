@@ -15,8 +15,10 @@ import com.example.saka.myapplication.databinding.FragmentHistoryBinding;
 import com.saka.myapplication.BaseComponent.API;
 import com.saka.myapplication.CustomAdapter.HistoryAdapter;
 import com.saka.myapplication.CustomAdapter.NoAlphaItemAnimator;
+import com.saka.myapplication.CustomInterface.ItemClickListener;
 import com.saka.myapplication.HttpUtil.RequestServers;
 import com.saka.myapplication.Models.HistoryModle;
+import com.saka.myapplication.Utils.TimeUtil;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends Fragment implements ItemClickListener {
 
     private FragmentHistoryBinding binding;
     private HistoryAdapter adapter;
@@ -52,7 +54,9 @@ public class HistoryFragment extends Fragment {
         binding.rvHistory.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.rvHistory.setItemAnimator(new NoAlphaItemAnimator());
         adapter = new HistoryAdapter(getActivity(), results);
+        adapter.setItemClickListener(this);
         binding.rvHistory.setAdapter(adapter);
+
         startRequest();
     }
 
@@ -64,7 +68,8 @@ public class HistoryFragment extends Fragment {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         final RequestServers requestServers = retrofit.create(RequestServers.class);
-        Call<HistoryModle> call = requestServers.getHistory(API.HISTORYKEY, String.valueOf(1.0), 11, 1);
+        Call<HistoryModle> call = requestServers.getHistory(API.HISTORYKEY, String.valueOf(1.0),
+                TimeUtil.getCurrentMonth(), TimeUtil.getCurrentDay());
         call.enqueue(new Callback<HistoryModle>() {
             @Override
             public void onResponse(Call<HistoryModle> call, Response<HistoryModle> response) {
@@ -81,4 +86,21 @@ public class HistoryFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onItemButtonClick(int resId) {
+
+    }
+
+    @Override
+    public void onItemClick(int resId) {
+        Log.d("fff", "点击了事件" + resId);
+        if (results[resId].getShowDetails() == View.GONE) {
+            Log.d("fff", "显示条目");
+            results[resId].setShowDetails(View.VISIBLE);
+        } else {
+            Log.d("fff", "隐藏条目");
+            results[resId].setShowDetails(View.GONE);
+        }
+        adapter.notifyItemChanged(resId);
+    }
 }

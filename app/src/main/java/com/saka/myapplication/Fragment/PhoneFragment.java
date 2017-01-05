@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.saka.myapplication.R;
 import com.example.saka.myapplication.databinding.FragmentPhoneBinding;
@@ -59,8 +60,12 @@ public class PhoneFragment extends Fragment {
                 PhoneModel phone = response.body();
                 Log.d(TAG, phone.toString());
                 phoneModel = phone.getResult();
-                Log.d(TAG, phoneModel.toString());
-                binding.setPhonemodel(phoneModel);
+                if (phoneModel != null) {
+                    Log.d(TAG, phoneModel.toString());
+                    binding.setPhonemodel(phoneModel);
+                }else{
+                    Toast.makeText(getActivity(), phone.getReason(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
