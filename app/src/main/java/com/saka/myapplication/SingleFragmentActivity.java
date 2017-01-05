@@ -11,6 +11,7 @@ import com.example.saka.myapplication.R;
 import com.example.saka.myapplication.databinding.ActivitySingleFragmentBinding;
 import com.saka.myapplication.BaseComponent.BaseActivity;
 import com.saka.myapplication.CustomInterface.TopBarClickListener;
+import com.saka.myapplication.Fragment.HistoryFragment;
 import com.saka.myapplication.Fragment.IdCardFragment;
 import com.saka.myapplication.Fragment.JokeFragment;
 import com.saka.myapplication.Fragment.PhoneFragment;
@@ -42,6 +43,10 @@ public class SingleFragmentActivity extends BaseActivity implements
                 break;
             case R.string.phonenum:
                 addFragment(new PhoneFragment());
+                break;
+            case R.string.history:
+                Log.d(TAG,"加载离殇上的今天");
+                addFragment(new HistoryFragment());
                 break;
             case R.string.tabbar_joke:
                 JokeFragment jokeFragment = new JokeFragment();

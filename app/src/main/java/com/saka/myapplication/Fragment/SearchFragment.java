@@ -51,7 +51,7 @@ public class SearchFragment extends BaseFragment implements ItemClickListener {
         list = new ArrayList<>();
         list.add(new SearchItem(R.mipmap.ic_launcher, R.string.idcard, false));
         list.add(new SearchItem(R.mipmap.ic_launcher, R.string.phonenum, false));
-        list.add(new SearchItem(R.mipmap.ic_launcher, R.string.tabbar_joke, false));
+        list.add(new SearchItem(R.mipmap.ic_launcher, R.string.history, false));
     }
 
 
@@ -66,6 +66,9 @@ public class SearchFragment extends BaseFragment implements ItemClickListener {
                 startTargetFragment(resId);
                 break;
             case R.string.tabbar_joke:
+                startTargetFragment(resId);
+                break;
+            case R.string.history:
                 startTargetFragment(resId);
                 break;
         }

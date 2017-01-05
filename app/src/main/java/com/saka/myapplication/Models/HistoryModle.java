@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class HistoryModle {
     private int error_code;
     private String reason;
-    private HistoryResult[] results;
+    private HistoryResult[] result;
 
     public int getError_code() {
         return error_code;
@@ -28,11 +28,11 @@ public class HistoryModle {
     }
 
     public HistoryResult[] getResults() {
-        return results;
+        return result;
     }
 
     public void setResults(HistoryResult[] results) {
-        this.results = results;
+        this.result = results;
     }
 
     @Override
@@ -40,19 +40,29 @@ public class HistoryModle {
         return "HistoryModle{" +
                 "error_code=" + error_code +
                 ", reason='" + reason + '\'' +
-                ", results=" + Arrays.toString(results) +
+                ", results=" + Arrays.toString(result) +
                 '}';
     }
 
-    class HistoryResult {
+    public class HistoryResult {
         private int day;
         private String des;
         private int id;
-        private String lunnar;
+        private String lunar;
         private int month;
         private String pic;
         private String title;
         private int year;
+
+        private String Date;
+
+        public String getDate() {
+            return year+"年"+month+"月"+day+"日";
+        }
+
+        public void setDate(String date) {
+            Date = date;
+        }
 
         public int getDay() {
             return day;
@@ -79,11 +89,11 @@ public class HistoryModle {
         }
 
         public String getLunnar() {
-            return lunnar;
+            return lunar;
         }
 
         public void setLunnar(String lunnar) {
-            this.lunnar = lunnar;
+            this.lunar = lunnar;
         }
 
         public int getMonth() {
@@ -124,7 +134,7 @@ public class HistoryModle {
                     "day=" + day +
                     ", des='" + des + '\'' +
                     ", id=" + id +
-                    ", lunnar='" + lunnar + '\'' +
+                    ", lunnar='" + lunar + '\'' +
                     ", month=" + month +
                     ", pic='" + pic + '\'' +
                     ", title='" + title + '\'' +
