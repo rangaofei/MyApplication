@@ -8,25 +8,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.saka.myapplication.R;
 import com.example.saka.myapplication.databinding.FragmentPhoneBinding;
 import com.saka.myapplication.BaseComponent.API;
-import com.saka.myapplication.HttpUtil.RequestServers;
+import com.saka.myapplication.BaseComponent.BaseFragment;
+import com.saka.myapplication.Models.BaseObserver;
 import com.saka.myapplication.Models.PhoneModel;
+import com.saka.myapplication.Models.RetroFactory;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import io.reactivex.Observable;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PhoneFragment extends Fragment {
+public class PhoneFragment extends BaseFragment {
     public static final String TAG = "phonefragment";
     private FragmentPhoneBinding binding;
     private PhoneModel.PhoneResult phoneModel;
@@ -47,31 +43,15 @@ public class PhoneFragment extends Fragment {
 
     public void getRusult(final String phonenum) {
         Log.d(TAG, "start with retrofit");
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API.BASEURL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build();
-        RequestServers requestServers = retrofit.create(RequestServers.class);
-        Call<PhoneModel> call = requestServers.getPhoneInfo(phonenum, API.PHONEKEY);
-        call.enqueue(new Callback<PhoneModel>() {
+        Observable observable = RetroFactory.getInstance().getPhoneInfo(phonenum, API.PHONEKEY);
+        observable.compose(composeFunction).subscribe(new BaseObserver<PhoneModel.PhoneResult>(getActivity()) {
             @Override
-            public void onResponse(Call<PhoneModel> call, Response<PhoneModel> response) {
-                PhoneModel phone = response.body();
-                Log.d(TAG, phone.toString());
-                phoneModel = phone.getResult();
-                if (phoneModel != null) {
-                    Log.d(TAG, phoneModel.toString());
-                    binding.setPhonemodel(phoneModel);
-                }else{
-                    Toast.makeText(getActivity(), phone.getReason(), Toast.LENGTH_SHORT).show();
-                }
+            public void onHandleSucess(PhoneModel.PhoneResult phoneResult) {
+                Log.d(TAG, "成功" + phoneResult.toString());
+                binding.setPhonemodel(phoneResult);
             }
 
-            @Override
-            public void onFailure(Call<PhoneModel> call, Throwable t) {
 
-            }
         });
     }
 

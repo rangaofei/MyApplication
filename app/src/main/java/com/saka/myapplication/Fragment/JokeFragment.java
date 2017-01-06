@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.saka.myapplication.R;
 import com.example.saka.myapplication.databinding.FragmentJokeBinding;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.saka.myapplication.BaseComponent.API;
 import com.saka.myapplication.BaseComponent.BaseFragment;
 import com.saka.myapplication.CustomAdapter.JokeRecyclerAdapter;
@@ -24,7 +25,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
@@ -54,7 +54,7 @@ public class JokeFragment extends BaseFragment {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API.BASEJOKEURL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         RequestServers servers = retrofit.create(RequestServers.class);
         long time=System.currentTimeMillis()/1000;

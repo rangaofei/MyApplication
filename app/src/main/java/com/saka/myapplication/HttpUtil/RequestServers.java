@@ -1,10 +1,12 @@
 package com.saka.myapplication.HttpUtil;
 
+import com.saka.myapplication.Models.BaseEntity;
 import com.saka.myapplication.Models.HistoryModle;
 import com.saka.myapplication.Models.IdForSearch;
 import com.saka.myapplication.Models.Joke;
 import com.saka.myapplication.Models.PhoneModel;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -21,10 +23,13 @@ public interface RequestServers {
     @GET("joke/content/list.from")
     Call<Joke> getJoke(@Query("key") String key, @Query("pagesize") int pagesize, @Query("time") String time);
 
-    @GET("/mobile/get")
-    Call<PhoneModel> getPhoneInfo(@Query("phone") String phonenum, @Query("key") String key);
+//    @GET("/mobile/get")
+//    Call<PhoneModel> getPhoneInfo(@Query("phone") String phonenum, @Query("key") String key);
 
     @GET("japi/toh")
     Call<HistoryModle> getHistory(@Query("key") String key, @Query("v") String v,
                                   @Query("month") int month, @Query("day") int day);
+
+    @GET("/mobile/get")
+    Observable<BaseEntity<PhoneModel.PhoneResult>> getPhoneInfo(@Query("phone") String phonenum, @Query("key") String key);
 }

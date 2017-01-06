@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.saka.myapplication.R;
 import com.example.saka.myapplication.databinding.FragmentIdCardBinding;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.saka.myapplication.BaseComponent.API;
 import com.saka.myapplication.HttpUtil.RequestServers;
 import com.saka.myapplication.Models.CardInfo;
@@ -27,7 +28,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
@@ -82,7 +82,7 @@ public class IdCardFragment extends Fragment {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API.BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         RequestServers servers = retrofit.create(RequestServers.class);
         retrofit2.Call<IdForSearch> call = servers.getIdCardInfo(API.IDCARDKEY, binding.txtId.getText().toString());

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.saka.myapplication.R;
 import com.example.saka.myapplication.databinding.FragmentHistoryBinding;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.saka.myapplication.BaseComponent.API;
 import com.saka.myapplication.CustomAdapter.HistoryAdapter;
 import com.saka.myapplication.CustomAdapter.NoAlphaItemAnimator;
@@ -24,7 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
@@ -65,7 +66,7 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API.BASEHISTORYURL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         final RequestServers requestServers = retrofit.create(RequestServers.class);
         Call<HistoryModle> call = requestServers.getHistory(API.HISTORYKEY, String.valueOf(1.0),
