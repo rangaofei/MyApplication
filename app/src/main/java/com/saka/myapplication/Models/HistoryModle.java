@@ -152,11 +152,13 @@ public class HistoryModle {
                     "day=" + day +
                     ", des='" + des + '\'' +
                     ", id=" + id +
-                    ", lunnar='" + lunar + '\'' +
+                    ", lunar='" + lunar + '\'' +
                     ", month=" + month +
                     ", pic='" + pic + '\'' +
                     ", title='" + title + '\'' +
                     ", year=" + year +
+                    ", Date='" + Date + '\'' +
+                    ", showDetails=" + showDetails +
                     '}';
         }
     }

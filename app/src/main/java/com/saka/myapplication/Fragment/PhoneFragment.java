@@ -15,7 +15,7 @@ import com.saka.myapplication.BaseComponent.API;
 import com.saka.myapplication.BaseComponent.BaseFragment;
 import com.saka.myapplication.Models.BaseObserver;
 import com.saka.myapplication.Models.PhoneModel;
-import com.saka.myapplication.Models.RetroFactory;
+import com.saka.myapplication.HttpUtil.RetroFactory;
 
 import io.reactivex.Observable;
 

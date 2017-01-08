@@ -77,6 +77,9 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
                 HistoryModle modle = response.body();
                 Log.d("fff", modle.toString());
                 results = modle.getResults();
+                for (HistoryModle.HistoryResult result : results) {
+                    result.setShowDetails(View.GONE);
+                }
                 adapter.refreshData(results);
             }
 

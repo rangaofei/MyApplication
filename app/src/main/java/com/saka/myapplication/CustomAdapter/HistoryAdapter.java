@@ -43,6 +43,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         holder.binding.setVariable(BR.historymodel, historyResults[position]);
         searchItemClick=new SearchItemClick(position);
         searchItemClick.setListener(listener);
+
         holder.binding.setVariable(BR.historyclickevent,searchItemClick);
         holder.binding.executePendingBindings();
 

@@ -1,9 +1,8 @@
-package com.saka.myapplication.Models;
+package com.saka.myapplication.HttpUtil;
 
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.saka.myapplication.BaseComponent.API;
-import com.saka.myapplication.HttpUtil.RequestServers;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;

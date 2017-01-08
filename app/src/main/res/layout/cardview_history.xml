@@ -6,6 +6,9 @@
         <variable
             name="historymodel"
             type="com.saka.myapplication.Models.HistoryModle.HistoryResult" />
+        <variable
+            name="showDetail"
+            type="com.saka.myapplication.Models.ShowDetail"/>
     <variable
         name="historyclickevent"
         type="com.saka.myapplication.Models.SearchItemClick"/>
