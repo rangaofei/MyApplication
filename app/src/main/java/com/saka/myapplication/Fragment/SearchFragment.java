@@ -13,12 +13,13 @@ import android.widget.Toast;
 import com.example.saka.myapplication.R;
 import com.example.saka.myapplication.databinding.FragmentSearchBinding;
 import com.saka.myapplication.BaseComponent.BaseFragment;
-import com.saka.myapplication.CustomAdapter.NoAlphaItemAnimator;
+import com.saka.myapplication.CameraActivity;
 import com.saka.myapplication.CustomAdapter.SearchRecyclerAdapter;
 import com.saka.myapplication.CustomInterface.ItemClickListener;
 import com.saka.myapplication.Models.SearchButton;
 import com.saka.myapplication.Models.SearchItem;
 import com.saka.myapplication.SingleFragmentActivity;
+import com.saka.myapplication.animator.NoAlphaItemAnimator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,7 @@ public class SearchFragment extends BaseFragment implements ItemClickListener {
         list.add(new SearchItem(R.mipmap.ic_launcher, R.string.idcard, false));
         list.add(new SearchItem(R.mipmap.ic_launcher, R.string.phonenum, false));
         list.add(new SearchItem(R.mipmap.ic_launcher, R.string.history, false));
+        list.add(new SearchItem(R.mipmap.ic_launcher, R.string.camera, false));
     }
 
 
@@ -71,10 +73,14 @@ public class SearchFragment extends BaseFragment implements ItemClickListener {
             case R.string.history:
                 startTargetFragment(resId);
                 break;
+            case R.string.camera:
+                Intent intent=new Intent(getActivity(), CameraActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
-    private void startTargetFragment(int resId){
+    private void startTargetFragment(int resId) {
         Intent intent = new Intent(getActivity(), SingleFragmentActivity.class);
         intent.putExtra("targetfragment", resId);
         startActivity(intent);

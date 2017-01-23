@@ -9,6 +9,7 @@
     <string name="idcard">身份证号码查询</string>
     <string name="phonenum">电话号码查询</string>
     <string name="history">历史上的今天</string>
+    <string name="camera">测试相机</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

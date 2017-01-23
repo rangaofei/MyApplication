@@ -15,17 +15,16 @@ import com.example.saka.myapplication.databinding.FragmentHistoryBinding;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.saka.myapplication.BaseComponent.API;
 import com.saka.myapplication.CustomAdapter.HistoryAdapter;
-import com.saka.myapplication.CustomAdapter.NoAlphaItemAnimator;
 import com.saka.myapplication.CustomInterface.ItemClickListener;
 import com.saka.myapplication.HttpUtil.RequestServers;
 import com.saka.myapplication.Models.HistoryModle;
 import com.saka.myapplication.Utils.TimeUtil;
+import com.saka.myapplication.animator.NoAlphaItemAnimator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
@@ -53,11 +52,11 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
 
     private void initViews() {
         binding.rvHistory.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.rvHistory.setItemAnimator(new NoAlphaItemAnimator());
+
         adapter = new HistoryAdapter(getActivity(), results);
         adapter.setItemClickListener(this);
         binding.rvHistory.setAdapter(adapter);
-
+        binding.rvHistory.setItemAnimator(new NoAlphaItemAnimator());
         startRequest();
     }
 

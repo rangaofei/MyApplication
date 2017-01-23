@@ -1,4 +1,4 @@
-package com.saka.myapplication.CustomAdapter;
+package com.saka.myapplication.animator;
 
 import android.support.annotation.NonNull;
 import android.support.v4.animation.AnimatorCompatHelper;
@@ -7,10 +7,15 @@ import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.saka.myapplication.R.id.history_more;
+
 
 /**
  * Created by Administrator on 2017/1/5.
@@ -127,6 +132,7 @@ public class NoAlphaItemAnimator extends SimpleItemAnimator {
                 @Override
                 public void run() {
                     for (ChangeInfo change : changes) {
+                        Log.d("adapter", "改变----changespending");
                         animateChangeImpl(change);
                     }
                     changes.clear();
@@ -300,6 +306,7 @@ public class NoAlphaItemAnimator extends SimpleItemAnimator {
     public boolean animateChange(RecyclerView.ViewHolder oldHolder, RecyclerView.ViewHolder newHolder,
                                  int fromX, int fromY, int toX, int toY) {
         if (oldHolder == newHolder) {
+
             // Don't know how to run change animations when the same view holder is re-used.
             // run a move animation to handle position changes.
             return animateMove(oldHolder, fromX, fromY, toX, toY);
@@ -308,6 +315,7 @@ public class NoAlphaItemAnimator extends SimpleItemAnimator {
         final float prevTranslationY = ViewCompat.getTranslationY(oldHolder.itemView);
         final float prevAlpha = ViewCompat.getAlpha(oldHolder.itemView);
         resetAnimation(oldHolder);
+
         int deltaX = (int) (toX - fromX - prevTranslationX);
         int deltaY = (int) (toY - fromY - prevTranslationY);
         // recover prev translation state after ending animation
@@ -340,6 +348,19 @@ public class NoAlphaItemAnimator extends SimpleItemAnimator {
                 @Override
                 public void onAnimationStart(View view) {
                     dispatchChangeStarting(changeInfo.oldHolder, true);
+                    if (view.findViewById(history_more).getVisibility() == View.GONE) {
+                        AlphaAnimation animation = new AlphaAnimation(0, 1);
+                        animation.setDuration(300);
+                        view.findViewById(history_more).startAnimation(animation);
+                    } else {
+
+                        AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
+                        alphaAnimation.setDuration(300);
+                        view.findViewById(history_more).startAnimation(alphaAnimation);
+                        view.findViewById(history_more).setVisibility(View.GONE);
+                    }
+
+//                    dispatchChangeFinished(changeInfo.oldHolder, true);
                 }
 
                 @Override
@@ -359,22 +380,24 @@ public class NoAlphaItemAnimator extends SimpleItemAnimator {
             mChangeAnimations.add(changeInfo.newHolder);
             newViewAnimation.translationX(0).translationY(0).setDuration(getChangeDuration()).
                     setListener(new VpaListenerAdapter() {
-                @Override
-                public void onAnimationStart(View view) {
-                    dispatchChangeStarting(changeInfo.newHolder, false);
-                }
+                        @Override
+                        public void onAnimationStart(View view) {
 
-                @Override
-                public void onAnimationEnd(View view) {
-                    newViewAnimation.setListener(null);
-                    ViewCompat.setAlpha(newView, 1);
-                    ViewCompat.setTranslationX(newView, 0);
-                    ViewCompat.setTranslationY(newView, 0);
-                    dispatchChangeFinished(changeInfo.newHolder, false);
-                    mChangeAnimations.remove(changeInfo.newHolder);
-                    dispatchFinishedWhenDone();
-                }
-            }).start();
+                            dispatchChangeStarting(changeInfo.newHolder, false);
+//                    dispatchChangeFinished(changeInfo.newHolder, false);
+                        }
+
+                        @Override
+                        public void onAnimationEnd(View view) {
+                            newViewAnimation.setListener(null);
+                            ViewCompat.setAlpha(newView, 1);
+                            ViewCompat.setTranslationX(newView, 0);
+                            ViewCompat.setTranslationY(newView, 0);
+                            dispatchChangeFinished(changeInfo.newHolder, false);
+                            mChangeAnimations.remove(changeInfo.newHolder);
+                            dispatchFinishedWhenDone();
+                        }
+                    }).start();
         }
     }
 
